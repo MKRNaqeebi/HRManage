@@ -1,0 +1,25 @@
+Bank Information
+Bank SWIFT Code
+SWIFT codes are 8 or 11 characters
+Bank Name
+Address
+City and State/Province
+Country
+Pakistan
+Account Currency
+Pakistan Rupee (PKR)
+Last Upwork exchange rate 99.9738 PKR/USD as of Feb 17, 2017 16:00 UTC
+Withdrawal Fee
+$0.99 USD per withdrawal
+Account Holder Information
+IBAN Number
+Branch Name
+Branch Address
+Name on Account
+Address
+City and State/Province
+Country
+Phone Number
+( )
+Area code plus phone number
+Remittance information

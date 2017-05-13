@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block title%}
+    {{ title }}
+{% endblock %}
+{% block main%}
+    <div class="container">
+        <div class="panel-heading">
+           <div class="panel-title text-center">
+                <h1 class="title">{{ title }}</h1>
+                <hr />
+            </div>
+        </div>
+        <div class="row">
+            <div class="list-group">
+                <ul class="listrap">
+                    {% if type == "HRP" or type == "HRM" %}
+                    <form id="ajaxFormSubmit" method="post" onsubmit="do_something()">
+                        {% csrf_token %}
+                    {% endif %}
+                    {% for app in list %}
+                        <li class="col-md-6 non_active">
+                            {% if type == "SME" or type == "HRM" %}
+                            <a href="/rate/{{ app.id }}">
+                            {% endif %}
+                                <div class="listrap-toggle ">
+                                    <span></span>
+                                    <img src="http://lorempixel.com/60/60/people/?v=1" class="img-circle" />
+                                    <input class="userID" type="hidden" name="userID[]" value="{{ app.id }}">
+                                </div>
+                                <strong>{{ app.user.first_name }} {{ app.user.last_name }}</strong>
+                                <p class="mb-1">{{ app.description }}</p>
+                                <a href="{{ app.document.url }}"><span class="glyphicon-class">glyphicon glyphicon-file</span></a>
+                            {% if type == "SME" or type == "HRM" %}
+                                <div id="stars1" class="starrr"></div>
+                            </a>
+                            {% endif %}
+                        </li>
+                    {% endfor %}
+                    {% if type == "HRP" or type == "HRM" %}
+                    <div class="col-md-12"><button type="submit" class="btn btn-primary btn-block">{{ title }}</button></div>
+                    </form>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endblock %}

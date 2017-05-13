@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title%}
+    {{ title }}
+{% endblock %}
+{% block main%}
+    <div class="container">
+        <div class="panel-heading">
+           <div class="panel-title text-center">
+                <h1 class="title">{{ title }}</h1>
+                <hr />
+            </div>
+        </div>
+        <div class="row">
+            <div class="list-group">
+                {% for job in types %}
+                    <a href="/apply/{{ job.id }}" class="list-group-item list-group-item-action flex-column align-items-start">
+                        <div class="justify-content-between">
+                            <h5 class="mb-1">{{ job.user_type }}</h5>
+                        </div>
+                        <p class="mb-1">{{ job.user.name }}</p>
+                    </a>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

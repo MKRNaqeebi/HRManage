@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block title%}
+    {{ title }}
+{% endblock %}
+{% block menu %}
+    {% if menu %}
+        {% for m in menu %}
+            <li><a href="/{{ m.1 }}">{{ m.0 }}</a></li>
+        {% endfor %}
+    {% endif %}
+    <li><a href="/logout">Logout</a></li>
+{% endblock %}
+{% block main%}
+<div class="container">
+    <div class="row main">
+        <div class="panel-heading">
+           <div class="panel-title text-center">
+                <h1 class="title">{{ title }}</h1>
+                <hr />
+            </div>
+        </div>
+        <div class="main-login main-center">
+            <p><span>Username:<bold>{{ user.username }}</bold></span></p>
+            <p><span>First Name:<bold>{{ user.first_name }}</bold></span></p>
+            <p><span>Last Name:<bold>{{ user.last_name }}</bold></span></p>
+            <p><span>Email:<bold>{{ user.email }}</bold></span></p>
+            <p><span>User Type:<bold>{{ type }}</bold></span></p>
+        </div>
+    </div>
+</div>
+{% endblock %}

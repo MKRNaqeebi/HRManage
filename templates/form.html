@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block title%}
+    {{ title }}
+{% endblock %}
+{% block menu %}
+    {% if title == "Job Feed" %}
+        <li><a href="/login">Login</a></li>
+        <li><a href="/register">Register</a></li>
+    {% endif %}
+{% endblock %}
+{% block main%}
+<div class="container">
+    <div class="row main">
+        <div class="panel-heading">
+           <div class="panel-title text-center">
+                <h1 class="title">{{ title }}</h1>
+                <hr />
+            </div>
+        </div>
+
+        {% if app %}
+            <div class="row">
+                <div class="col-md-12">
+                    <h5 class="mb-1">{{ app.job.title }}</h5>
+                    <small>{{ app.job.created_at }}</small>
+
+                    <p class="mb-1">{{ app.job.description }}</p>
+                    <small>{{ app.job.category }}</small> By <small>{{ app.job.company }}</small>
+                </div>
+                <div class="col-md-12">
+                    <span>User Perposel</span>
+                    <p class="mb-1">{{ app.description }}</p>
+                    <a href="{{ app.document.url }}"><span class="glyphicon-class">glyphicon glyphicon-file</span></a>
+                </div>
+            </div>
+        {% endif %}
+        {% if job %}
+            <div class="row">
+                <div class="col-md-12">
+                    <h5 class="mb-1">{{ job.title }}</h5>
+                    <small>{{ job.created_at }}</small>
+
+                    <p class="mb-1">{{ job.description }}</p>
+                    <small>{{ job.category }}</small> By <small>{{ job.company }}</small>
+                </div>
+            </div>
+        {% endif %}
+        <div class="main-login main-center">
+            <form class="form-horizontal" method="POST"
+                    {% if job %}
+                        enctype="multipart/form-data" data-ajax="false"
+                    {% endif %}>
+                {% if title == "Rate Application" %}
+                    <div id="div_id_comment" class="form-group">
+                        <label for="id_comment" class="control-label  requiredField">Rate<span class="asteriskField">*</span> </label>
+                        <div class="controls ">
+                            <div id="stars" class="starrr"></div>
+                        </div>
+                    </div>
+                {% endif %}
+                {% csrf_token %}
+                {{ form | crispy }}
+
+                <button type="submit" class="btn btn-primary btn-block">{{ title }}</button>
+
+                {% if title == "Login" %}
+                    <div class="login-register">
+                        <a href="/register">Register</a>
+                        or
+                        <a href="/">Forget Password</a>
+                    </div>
+                {% endif %}
+                {% if title == "Register" %}
+                    <div class="login-register">
+                        <a href="/login">Login</a>
+                    </div>
+                {% endif %}
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

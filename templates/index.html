@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block title%}
+    {{ title }}
+{% endblock %}
+{% block menu %}
+    {% if title == "Job Feed" %}
+        <li><a href="/login">Login</a></li>
+        <li><a href="/register">Register</a></li>
+    {% else %}
+        {% if menu %}
+            {% for m in menu %}
+                <li><a href="/{{ m.1 }}">{{ m.0 }}</a></li>
+            {% endfor %}
+        {% endif %}
+        <li><a href="/logout">Logout</a></li>
+    {% endif %}
+{% endblock %}
+{% block main%}
+    <div class="container">
+        <div class="panel-heading">
+           <div class="panel-title text-center">
+                <h1 class="title">{{ title }}</h1>
+                <hr />
+            </div>
+        </div>
+        <div class="row">
+            <div class="list-group">
+                {% for job in jobs %}
+                    <a
+                            {% if title == "Post CV" %}
+                                href="/apply/{{ job.id }}"
+                            {% elif title == "Application By Job" %}
+                                href="/application/{{ job.id }}"
+                            {% endif %}
+                            class="list-group-item list-group-item-action flex-column align-items-start">
+                        <div class="justify-content-between">
+                            <h5 class="mb-1">{{ job.title }}</h5>
+                            <small>{{ job.created_at }}</small>
+                        </div>
+                        <p class="mb-1">{{ job.description }}</p>
+                        <small>{{ job.category }}</small> By <small>{{ job.company }}</small>
+                    </a>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
